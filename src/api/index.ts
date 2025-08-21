@@ -16,15 +16,8 @@ app.use(cors(corsOptions));
 app.use(express.json());
 
 // Index file
-const welcomeHtml = fs.readFileSync(
-  path.join(__dirname, "../public/index.html"),
-  "utf-8"
-);
-
 app.get("/", (req, res) => {
-  // Now you can use the 'welcomeHtml' variable
-  res.setHeader("Content-Type", "text/html");
-  res.send(welcomeHtml);
+  res.sendFile(path.join(__dirname, "../public/index.html"));
 });
 
 // PostHog routes
