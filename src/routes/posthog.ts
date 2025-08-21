@@ -23,4 +23,11 @@ router.post(/(.*)/, async (req, res) => {
   }
 });
 
+router.get(/(.*)/, async (req, res) => {
+  res.status(200).json({
+    status: "success",
+    message: "PostHog proxy is running",
+  });
+});
+
 export default router;
