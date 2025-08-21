@@ -4,10 +4,6 @@ import fetch from "node-fetch";
 const router = Router();
 
 router.post(/(.*)/, async (req: Request, res: Response) => {
-  // 1. Log the incoming request to see what you're receiving
-  console.log(`[PROXY] Incoming request for: ${req.url}`);
-  console.log(`[PROXY] Request body:`, JSON.stringify(req.body, null, 2));
-
   try {
     const posthogHost = "https://us.i.posthog.com";
 
@@ -17,17 +13,20 @@ router.post(/(.*)/, async (req: Request, res: Response) => {
       headers: { "Content-Type": "application/json" },
     });
 
-    // 2. Log the response status from PostHog
-    console.log(
-      `[PROXY] Response from PostHog: ${response.status} ${response.statusText}`
-    );
+    // --- Start of Fix ---
+    // Try to parse the response as JSON.
+    // If it fails, it's likely plain text, so handle that.
+    let data;
+    try {
+      data = await response.json();
+    } catch (e) {
+      data = await response.text();
+    }
+    // --- End of Fix ---
 
-    const data = await response.json();
-    res.status(response.status).json(data);
+    res.status(response.status).send(data);
   } catch (error) {
-    // 3. Log any error that occurs during the fetch
     console.error("[PROXY] Error forwarding request:", error);
-
     res.status(500).json({
       status: "error",
       message: "Error forwarding request to PostHog",
