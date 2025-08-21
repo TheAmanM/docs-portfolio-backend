@@ -20,6 +20,13 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../public/index.html"));
 });
 
+// Resume file
+app.get("/resume", (req, res) => {
+  res.sendFile(
+    path.join(__dirname, "../resume/Aman Meherally - Full Stack Developer.pdf")
+  );
+});
+
 // PostHog routes
 app.use("/p", posthogRouter);
 
