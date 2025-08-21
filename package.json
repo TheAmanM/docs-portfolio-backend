@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "dev": "concurrently \"tsc --watch\" \"nodemon\"",
+    "dev": "concurrently \"tsc --watch\" \"nodemon dist/local-dev.js\"",
     "start": "node dist/api/index.js"
   },
   "keywords": [],
@@ -21,6 +21,7 @@
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",
     "@types/node": "^24.3.0",
+    "@types/node-fetch": "^2.6.13",
     "concurrently": "^9.2.0",
     "nodemon": "^3.1.10",
     "ts-node-dev": "^2.0.0",
