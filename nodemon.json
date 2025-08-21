@@ -1,5 +1,5 @@
 {
-  "watch": ["dist"],
-  "ext": "js",
-  "exec": "node dist/local-dev.js"
+  "watch": ["src"],
+  "ext": "ts,json",
+  "exec": "ts-node ./src/local-dev.ts"
 }
