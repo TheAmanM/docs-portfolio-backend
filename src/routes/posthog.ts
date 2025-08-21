@@ -1,9 +1,9 @@
-import { Router } from "express";
+import express from "express";
 import fetch from "node-fetch";
 
-const router = Router();
+const router = express.Router();
 
-router.post("/*", async (req, res) => {
+router.post(/(.*)/, async (req, res) => {
   try {
     const posthogHost = "https://us.i.posthog.com";
 

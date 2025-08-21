@@ -3,7 +3,6 @@ import cors from "cors";
 import posthogRouter from "../routes/posthog";
 
 const app = express();
-
 const corsOptions = {
   origin: "https://amanmeherally.com",
 };
